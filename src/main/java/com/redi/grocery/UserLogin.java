@@ -35,7 +35,7 @@ public class UserLogin {
         System.out.println("Enter your password");
         String password = scan.next();
 
-        Customer c = this.customerTable.getCustomer(email,password);
+        Customer c = this.customerTable.getCustomer(email, password);
         if(c == null){
             System.out.println("Login failed. User email or password did not match");
         }else{

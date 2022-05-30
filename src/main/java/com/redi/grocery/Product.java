@@ -6,15 +6,19 @@ public class Product {
     private final UUID id;
     private final String name;
     private  int stock;
-    private int price;
+    private float price;
     private final String category;
 
-    public Product(UUID id, String name, int stock, int price, String category) {
+    public Product(UUID id, String name, int stock, float price, String category) {
         this.id = id;
         this.name = name;
         this.stock = stock;
         this.price = price;
         this.category = category;
+    }
+
+    public Product(String name, int stock, float price, String category){
+        this(UUID.randomUUID(),name, stock, price, category);
     }
 
     public UUID getId() {
@@ -33,7 +37,7 @@ public class Product {
         this.stock = stock;
     }
 
-    public int getPrice() {
+    public float getPrice() {
         return price;
     }
 

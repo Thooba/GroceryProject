@@ -21,7 +21,7 @@ public class ProductTable {
                products.add(new Product(UUID.fromString(items[0]),
                                         items[1],
                                         Integer.parseInt(items[2]),
-                                        Integer.parseInt(items[3]),
+                                        Float.parseFloat(items[3]),
                                         items[4]));
            }
        } finally {
