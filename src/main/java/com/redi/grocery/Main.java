@@ -5,20 +5,28 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+//        menu();
+        ChooseProduct chose = new ChooseProduct();
+        chose.chooseProduct();
+    }
+
+    private static void menu() throws IOException {
 
         UserLogin userLogin = new UserLogin();
         Customer c = null;
         Option options  = new Option();
+        ChooseProduct chose = new ChooseProduct();
         Deliver deliver1 = new Deliver();
         Scanner input = new Scanner(System.in);
 
-        do{
+        do {
             c = userLogin.signUpPage();
-            System.out.println(c);
-        }while(c==null);
+        } while(c==null);
+
         while(true){
             System.out.println("Please choose a service:  ");
             options.printMenu();
+
             int choice = options.askService();
             switch(choice){
                 case 1:
@@ -43,6 +51,5 @@ public class Main {
                     return;
             }
         }
-
     }
 }
