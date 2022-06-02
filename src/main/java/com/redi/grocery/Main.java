@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws IOException {
 //        menu();
-        ChooseProduct chose = new ChooseProduct();
-        chose.chooseProduct();
+        SearchProduct chose = new SearchProduct();
+        chose.chooseCategory();
     }
 
     private static void menu() throws IOException {
@@ -15,7 +15,7 @@ public class Main {
         UserLogin userLogin = new UserLogin();
         Customer c = null;
         Option options  = new Option();
-        ChooseProduct chose = new ChooseProduct();
+        SearchProduct chose = new SearchProduct();
         Deliver deliver1 = new Deliver();
         Scanner input = new Scanner(System.in);
 

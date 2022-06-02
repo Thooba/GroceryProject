@@ -17,9 +17,11 @@ public class ProductTable {
                String[] items = line.split(splitBy);
                this.products.add(new Product(UUID.fromString(items[0]),
                                         items[1],
-                                        Integer.parseInt(items[2]),
-                                        Float.parseFloat(items[3]),
-                                        items[4]));
+                                        items[2],
+                                        Integer.parseInt(items[3]),
+                                        Float.parseFloat(items[4]),
+                                        items[5],
+                                        items[6]));
            }
        } finally {
            try {
@@ -57,20 +59,29 @@ public class ProductTable {
 
     public List<String> getNames(){
       List<String> name = new ArrayList<String>();
-        for(Product a : this.products){
-            name.add(a.getName());
+        for(Product p : this.products){
+            name.add(p.getName());
         }
         return name;
     }
 
     public List<String> getNamesByCategory(String category) {
         List<String> names = new ArrayList<>();
-        for(Product s : products) {
-            if (s.getCategory().equals(category)) {
-              names.add(s.getName());
+        for(Product p : products) {
+            if (p.getCategory().equals(category)) {
+              names.add(p.getName());
             }
         }
 
         return names;
+    }
+
+    public Product getProduct(String category,String name){
+        for(Product p : products){
+            if(p.getCategory().equals(category) && p.getName().equals(name)){
+                return p;
+            }
+        }
+        return null;
     }
 }
