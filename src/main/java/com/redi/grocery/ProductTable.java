@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 public class ProductTable {
-    private final String path ="/Users/apple/workspace/redi-java-intermediate/GroceryProject/src/data/product.csv";
+    private final String path ="src/data/product.csv";
     private final String splitBy =",";
     private final List<Product> products;
 
@@ -36,8 +36,7 @@ public class ProductTable {
    public  void write(Product product) throws IOException {
        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path, true));
        try {
-           bufferedWriter.newLine();
-           bufferedWriter.write(product.toString());
+           bufferedWriter.write(product.toString() +System.lineSeparator());
        }  finally  {
            try {
                bufferedWriter.close();
@@ -79,6 +78,15 @@ public class ProductTable {
     public Product getProduct(String category,String name){
         for(Product p : products){
             if(p.getCategory().equals(category) && p.getName().equals(name)){
+                return p;
+            }
+        }
+        return null;
+    }
+
+    public Product getProductById(UUID custId){
+        for(Product p : products){
+            if(p.getId().equals(custId)){
                 return p;
             }
         }
