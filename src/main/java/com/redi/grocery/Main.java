@@ -11,6 +11,8 @@ public class Main {
     private static void menu() throws IOException, InterruptedException {
         Util.clearScreen();
         UserLogin userLogin = new UserLogin();
+        AdminModule am = new AdminModule();
+        ProductHelper ph = new ProductHelper();
         Customer customer = null;
 
         do {
@@ -47,6 +49,30 @@ public class Main {
             }
         } else {
             System.out.println("You are an admin");
+            AdminOptions adminOptions = new AdminOptions();
+
+            while (true) {
+                int a = adminOptions.options();
+                Util.clearScreen();
+                switch (a){
+                    case 1:
+                       am.viewOrders();
+                        break;
+                    case 2:
+                        am.viewCustomer();
+                        break;
+                    case 3:
+                        ph.addProduct();
+                        break;
+                    case 0:
+                        System.out.println("You are logged out");
+                        return;
+
+
+                }
+
+            }
+
         }
     }
 }

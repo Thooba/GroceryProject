@@ -1,12 +1,15 @@
 package com.redi.grocery;
 
 import java.io.*;
+import java.security.PrivateKey;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class ProductTable {
     private final String path ="src/data/product.csv";
     private final String splitBy =",";
     private final List<Product> products;
+
 
     public ProductTable() throws IOException {
        String line;
@@ -84,12 +87,31 @@ public class ProductTable {
         return null;
     }
 
-    public Product getProductById(UUID custId){
+    public Product getProductById(UUID productId){
         for(Product p : products){
-            if(p.getId().equals(custId)){
+            if(p.getId().equals(productId)){
                 return p;
             }
         }
         return null;
+    }
+
+    public void updateStock(List<Cart> cartItems) throws IOException {
+        for(Cart c :cartItems ) {
+            Product p = this.getProductById(c.getProductId());
+            p.setStock(p.getStock() - c.getQuantity());
+        }
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path));
+        try {
+            for(Product p :products ) {
+                bufferedWriter.write(p.toString() + System.lineSeparator());
+            }
+        }  finally  {
+            try {
+                bufferedWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -25,6 +25,9 @@ public class Product {
         this(UUID.randomUUID(),name, description, stock, price, category, unit);
     }
 
+
+
+
     public UUID getId() {
         return id;
     }

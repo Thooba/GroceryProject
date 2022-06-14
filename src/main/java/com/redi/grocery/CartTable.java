@@ -27,7 +27,13 @@ public class CartTable {
                                      Integer.parseInt(items[3]),
                                      d);
                 if (customer == null){
-                    cartItems.add(cart);
+                    if (orderStatus == 0 || orderStatus == 1 ){
+                        if (cart.getOrderStatus() == orderStatus){
+                            cartItems.add(cart);
+                        }
+                    } else {
+                        cartItems.add(cart);
+                    }
                 } else if (customer.getCustId().equals( cart.getCustId()) && cart.getOrderStatus() == orderStatus) {
                     cartItems.add(cart);
                 }

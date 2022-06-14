@@ -84,7 +84,9 @@ public class SearchProduct {
         do {
             quantity = scan.nextInt();
             scan.nextLine();
-            if (quantity > selectedProduct.getStock()) {
+            if(selectedProduct.getStock() == 0){
+                System.out.println("Product is out  of  stock");
+            } else if (quantity > selectedProduct.getStock() ) {
                 System.out.println("Please enter the quantity less than available stock: " + selectedProduct.getStock());
             }else if(quantity < 0){
                 System.out.println("Invalid input. Please try again.");
@@ -127,9 +129,11 @@ public class SearchProduct {
             if (a.equals("y")) {
                 Deliver delivery = new Deliver();
                 delivery.getDeliverService();
-                TimeUnit.SECONDS.sleep(3);
+                TimeUnit.SECONDS.sleep(1);
                 Util.clearScreen();
                 this.cartTable.updateCartOrderStatus(customer);
+                this.pt.updateStock(cartItems);
+
             }
         }
     }
