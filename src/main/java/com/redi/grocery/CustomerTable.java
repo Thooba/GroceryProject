@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class CustomerTable {
-    private final String path = "/Users/apple/workspace/redi-java-intermediate/GroceryProject/src/data/customer.csv";
+    private final String path = "src/data/customer.csv";
     private final String splitBy = ",";
     private List<Customer> customers = new ArrayList<>();
 
@@ -21,7 +21,8 @@ public class CustomerTable {
                                             items[1],
                                             items[2],
                                             items[3],
-                                            LocalDate.parse(items[4])));
+                                            LocalDate.parse(items[4]),
+                                            Integer.parseInt(items[5])));
             }
         }  finally  {
             try {
@@ -35,8 +36,7 @@ public class CustomerTable {
     public void write(Customer customer) throws IOException {
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path, true));
         try {
-            bufferedWriter.newLine();
-            bufferedWriter.write(customer.toString());
+            bufferedWriter.write(customer.toString() + System.lineSeparator());
         }  finally  {
             try {
                 bufferedWriter.close();

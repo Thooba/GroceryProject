@@ -1,6 +1,7 @@
-7607720a-1f36-46f7-94fb-724f21fb5b71,MilkBread,10,3.0,Bread
-6d4509d7-ed86-4efd-a3d5-9cee5293930b,ButterBread,10,4.0,Bread
-48e0199e-3fb1-42b1-8084-7c647de17e5a,Chicken,20,5.5,Meat
-b58523bb-1b5d-4454-918d-f8f78c6aad85,Mutton,15,8.0,Meat
-6e01a947-b6e5-406b-b9a4-785c97927a68,Milk,25,3.0,Dairy
-c7f3b16b-a3f3-4fd5-aca2-b9c57b4214a7,cheese,5,3.5,Dairy
+7607720a-1f36-46f7-94fb-724f21fb5b71,Milk Bread,High quality brown bread category 'A',9,3.0,Bread,packet
+6d4509d7-ed86-4efd-a3d5-9cee5293930b,Butter Bread,Brown bread with butter,8,4.0,Bread,packet
+48e0199e-3fb1-42b1-8084-7c647de17e5a,Chicken,High quality bio chicken,20,5.5,Meat,kg
+b58523bb-1b5d-4454-918d-f8f78c6aad85,Mutton,High quality bio mutton,15,8.0,Meat,kg
+6e01a947-b6e5-406b-b9a4-785c97927a68,Milk,3.5% fat cow milk,21,3.0,Dairy,liter
+c7f3b16b-a3f3-4fd5-aca2-b9c57b4214a7,cheese,High quality freshly made mozzarella cheese,0,6.0,Dairy,100g
+914ce302-812d-4ba4-bf0b-734ac5684e28,carrot,High quality bio carrot,10,1.0,vegetables,kg
