@@ -1,18 +1,18 @@
 package com.redi.grocery;
 import java.io.IOException;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
+import java.security.NoSuchAlgorithmException;
 
 public class Main {
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException, NoSuchAlgorithmException {
         menu();
     }
 
-    private static void menu() throws IOException, InterruptedException {
+    private static void menu() throws IOException, InterruptedException, NoSuchAlgorithmException {
         Util.clearScreen();
         UserLogin userLogin = new UserLogin();
         AdminModule am = new AdminModule();
         ProductHelper ph = new ProductHelper();
+        Option options = new Option();
         Customer customer = null;
 
         do {
@@ -24,13 +24,9 @@ public class Main {
         System.out.println("-------------------------------------");
 
         if(customer.getIsAdmin() == 0) {
-            Option options = new Option();
             SearchProduct search = new SearchProduct(customer);
-            Deliver deliver = new Deliver();
-
             while (true) {
-                options.printMenu();
-                int choice = options.askService();
+                int choice = options.customerOptions();
                 Util.clearScreen();
                 switch (choice) {
                     case 1:
@@ -48,15 +44,12 @@ public class Main {
                 }
             }
         } else {
-            System.out.println("You are an admin");
-            AdminOptions adminOptions = new AdminOptions();
-
             while (true) {
-                int a = adminOptions.options();
+                int a = options.adminOptions();
                 Util.clearScreen();
                 switch (a){
                     case 1:
-                       am.viewOrders();
+                        am.viewOrders();
                         break;
                     case 2:
                         am.viewCustomer();
@@ -64,6 +57,9 @@ public class Main {
                     case 3:
                         ph.addProduct();
                         break;
+                    case 4:
+                        SearchProduct search = new SearchProduct(customer);
+                        search.chooseCategory();
                     case 0:
                         System.out.println("You are logged out");
                         return;

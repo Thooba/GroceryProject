@@ -11,15 +11,18 @@ public class SearchProduct {
     Scanner scan ;
     Customer customer;
     CartTable cartTable ;
+    ProductHelper productHelper;
 
     public SearchProduct(Customer customer) throws IOException {
         this.customer = customer;
         this.pt = new ProductTable();
         this.scan = new Scanner(System.in);
         this.cartTable = new CartTable();
+        this.productHelper = new ProductHelper();
     }
 
     public void chooseCategory() throws IOException, InterruptedException {
+        this.pt.read();
         List<String> categories = this.pt.getCategories();
         int categoryChoice = 0;
         do {
@@ -46,7 +49,8 @@ public class SearchProduct {
     public void chooseProduct(String categorySelected) throws IOException, InterruptedException {
         int nameChoice = 0;
         do {
-            System.out.println("Choose product in  " + categorySelected + "category");
+            this.pt.read();
+            System.out.println("Choose product in  " + categorySelected + " category");
             List<String> names = this.pt.getNamesByCategory(categorySelected);
             int pos1 = 0;
             for (String st : names) {
@@ -61,47 +65,15 @@ public class SearchProduct {
                 System.out.println("Invalid input. Please try again. ");
             } else if (nameChoice > 0) {
                 String nameSelected = names.get(nameChoice - 1);
-                productPage(categorySelected, nameSelected);
+                if(customer.getIsAdmin() == 0) {
+                    productHelper.productCustomerPage(categorySelected, nameSelected, customer, cartTable);
+                } else {
+                    productHelper.productAdminPage(categorySelected, nameSelected);
+                }
+
             }
         } while (nameChoice != 0);
 
-    }
-
-
-    public void productPage(String categorySelected, String nameSelected) throws IOException, InterruptedException {
-        Product selectedProduct = pt.getProduct(categorySelected, nameSelected);
-        System.out.println("--------------------------------------");
-        System.out.println(selectedProduct.getName());
-        System.out.println("--------------------------------------");
-        System.out.println("Description: " + selectedProduct.getDescription() + ".");
-        System.out.println("Price: " + selectedProduct.getPrice() + " euro" + "/" + selectedProduct.getUnit());
-        System.out.println("Available stock: " + selectedProduct.getStock());
-        System.out.println("---------------------------------------");
-        System.out.println("Enter the quantity");
-        System.out.println("press 0 for return");
-        int quantity = 0 ;
-        int orderStatus = 0;
-        do {
-            quantity = scan.nextInt();
-            scan.nextLine();
-            if(selectedProduct.getStock() == 0){
-                System.out.println("Product is out  of  stock");
-            } else if (quantity > selectedProduct.getStock() ) {
-                System.out.println("Please enter the quantity less than available stock: " + selectedProduct.getStock());
-            }else if(quantity < 0){
-                System.out.println("Invalid input. Please try again.");
-            }
-        } while (quantity > selectedProduct.getStock() || quantity < 0);
-        Util.clearScreen();
-        if (quantity > 0){
-            System.out.println("Product added to cart.");
-            TimeUnit.SECONDS.sleep(2);
-            Util.clearScreen();
-            selectedProduct.getId();
-            LocalDateTime localDateTime = null;
-            Cart cart = new Cart(selectedProduct.getId(), customer.getCustId(), quantity, orderStatus, localDateTime);
-            this.cartTable.write(cart);
-        }
     }
 
     public void viewCart() throws IOException, InterruptedException {

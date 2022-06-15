@@ -2,6 +2,7 @@ package com.redi.grocery;
 
 import java.io.Console;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -17,7 +18,7 @@ public class UserLogin {
         this.console = System.console();
     }
 
-    public Customer signUpPage() throws IOException, InterruptedException {
+    public Customer signUpPage() throws IOException, InterruptedException, NoSuchAlgorithmException {
 
         System.out.println("Welcome to awesome groceries shop");
         System.out.println("1.Login");
@@ -32,7 +33,7 @@ public class UserLogin {
         }
     }
 
-    public Customer login() throws InterruptedException {
+    public Customer login() throws InterruptedException, NoSuchAlgorithmException {
 
         System.out.println("Enter your email");
         String email = scan.next();
@@ -44,7 +45,7 @@ public class UserLogin {
         } catch (NullPointerException e) {
             password = scan.next();
         }
-
+        password = Util.sha256Encrypt(password);
         Customer c = this.customerTable.getCustomer(email, password);
         if(c == null){
             Util.clearScreen();
@@ -55,7 +56,7 @@ public class UserLogin {
         return c;
     }
 
-    public Customer registration() throws IOException, InterruptedException {
+    public Customer registration() throws IOException, InterruptedException, NoSuchAlgorithmException {
         System.out.println("Whats your name");
         String name = scan.next();
         System.out.println("whats your email_id?");
@@ -67,6 +68,7 @@ public class UserLogin {
         } catch (NullPointerException e) {
             password = scan.next();
         }
+        password = Util.sha256Encrypt(password);
         if(customerTable.validateEmail(email)){
             Util.clearScreen();
             System.out.println("Email already exists. Please login.");
